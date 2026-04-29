@@ -1,8 +1,9 @@
 package model;
 
 import enums.Language;
+import interfaces.Authenticatable;
 
-public class User {
+public class User implements Authenticatable {
     private String id;
     private String fullName;
     private String username;
@@ -16,6 +17,26 @@ public class User {
         this.password = password;
         this.language = language;
     }
+
+    public void changeLanguage(Language language){
+        this.language = language;
+    }
+
+    @Override
+    public boolean login(String username, String password) {
+        if((this.username.equals(username)) && (this.password.equals(password)) ) {
+            System.out.println(this.fullName + " is logged in the system");
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void logout() {
+        System.out.println("User " + username + " is logged out" );
+    }
+
+
 
     @Override
     public String toString() {
@@ -36,5 +57,17 @@ public class User {
 
     public Language getLanguage() {
         return language;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
